@@ -8,6 +8,35 @@
     <title>The game "Stone, scissors and paper"</title>
   </head>
   <body>
+    <header>
+      <h1>Game: "Stone, scissors and paper"</h1>
+    </header>
+    <main>
+      <h2>Please choose:</h2>
+      <div class="select">
+        <img data-option="stone" src="./img/stone.jpg" alt="Stone" />
+        <img data-option="scissors" src="./img/scissors.jpg" alt="Scissors" />
+        <img data-option="paper" src="./img/paper.jpg" alt="Paper" />
+      </div>
+
+      <div class="results">
+        <article class="gameResults">
+          <h3>Game results</h3>
+          <p>Your choise: <span class="playerChoise"></span></p>
+          <p>Computer choise: <span class="aiChoise"></span></p>
+          <h3>Winner of the game: <span class="whoWins"></span></h3>
+        </article>
+
+        <article class="allResults">
+          <h3>Current results:</h3>
+          <p>Number of games: <span class="allGamesNumber">0</span></p>
+          <p>Number of your wins: <span class="winsNumber">0</span></p>
+          <p>Number of your lose <span class="losesNumber">0</span></p>
+          <p>Number of draws: <span class="drawsNumber">0</span></p>
+        </article>
+      </div>
+    </main>
+
     <script src="./main.js"></script>
   </body>
 </html>
