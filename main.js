@@ -36,19 +36,29 @@ const aiSelection = () => {
 };
 
 const chekResult = (player, ai) => {
-  spanPlayerChoice.textContent = player;
-  spanAiChoice.textContent = ai;
-  allgames.textContent = ++numbersOfGame;
   if (ai === player) {
-    pWinner.textContent = "Draw";
-    pWinner.style.color = "blue";
-    pWinner.style.textShadow = "rgb(136, 182, 255) 3px 3px 4px";
-    draws.textContent = ++numbersOfDraw;
+    return "draws";
   } else if (
     (ai === "paper") & (player === "stone") ||
     (ai === "scissors") & (player === "paper") ||
     (ai === "stone") & (player === "scissors")
   ) {
+    return "lose";
+  } else {
+    return "win";
+  }
+};
+
+const publishResult = (player, ai, result) => {
+  spanPlayerChoice.textContent = player;
+  spanAiChoice.textContent = ai;
+  allgames.textContent = ++numbersOfGame;
+  if (result === "draw") {
+    pWinner.textContent = "Draw";
+    pWinner.style.color = "blue";
+    pWinner.style.textShadow = "rgb(136, 182, 255) 3px 3px 4px";
+    draws.textContent = ++numbersOfDraw;
+  } else if (result === "lose") {
     pWinner.textContent = "Sorry, but you LOST this time :(";
     pWinner.style.color = "rgba(255, 0, 0, 0.5)";
     pWinner.style.textShadow = "rgb(255, 204, 204) 3px 3px 4px";
@@ -60,7 +70,6 @@ const chekResult = (player, ai) => {
     myWins.textContent = ++numbersOfWins;
   }
 };
-
 const endGame = () => {
   game.playerChoice = "";
   game.aiChoice = "";
@@ -76,7 +85,7 @@ const startGame = () => {
   game.aiChoice = aiSelection();
 
   const gameResult = chekResult(game.playerChoice, game.aiChoice);
-
+  publishResult(game.playerChoice, game.aiChoice, gameResult);
   endGame();
 };
 
