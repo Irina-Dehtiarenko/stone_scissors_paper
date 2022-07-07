@@ -15,6 +15,11 @@ let game = {
   aiChoice: "",
 };
 
+let numbersOfGame = 0;
+let numbersOfDraw = 0;
+let numbersOfLoses = 0;
+let numbersOfWins = 0;
+
 const playerSelection = (e) => {
   const img = e.target;
   options.forEach((option) => {
@@ -30,6 +35,32 @@ const aiSelection = () => {
   return options[index].dataset.option;
 };
 
+const chekResult = (player, ai) => {
+  spanPlayerChoice.textContent = player;
+  spanAiChoice.textContent = ai;
+  allgames.textContent = ++numbersOfGame;
+  if (ai === player) {
+    pWinner.textContent = "Draw";
+    pWinner.style.color = "blue";
+    pWinner.style.textShadow = "rgb(136, 182, 255) 3px 3px 4px";
+    draws.textContent = ++numbersOfDraw;
+  } else if (
+    (ai === "paper") & (player === "stone") ||
+    (ai === "scissors") & (player === "paper") ||
+    (ai === "stone") & (player === "scissors")
+  ) {
+    pWinner.textContent = "Sorry, but you LOST this time :(";
+    pWinner.style.color = "rgba(255, 0, 0, 0.5)";
+    pWinner.style.textShadow = "rgb(255, 204, 204) 3px 3px 4px";
+    myLoses.textContent = ++numbersOfLoses;
+  } else {
+    pWinner.textContent = "Congratulations, you are a WINNER :)";
+    pWinner.style.color = "green";
+    pWinner.style.textShadow = "rgb(163, 255, 188) 3px 3px 4px";
+    myWins.textContent = ++numbersOfWins;
+  }
+};
+
 const endGame = () => {
   game.playerChoice = "";
   game.aiChoice = "";
@@ -43,26 +74,9 @@ const startGame = () => {
     return alert("Please choose something!");
   }
   game.aiChoice = aiSelection();
-  spanPlayerChoice.textContent = game.playerChoice;
-  spanAiChoice.textContent = game.aiChoice;
 
-  if (
-    (game.aiChoice === "paper") & (game.playerChoice === "stone") ||
-    (game.aiChoice === "scissors") & (game.playerChoice === "paper") ||
-    (game.aiChoice === "stone") & (game.playerChoice === "scissors")
-  ) {
-    pWinner.textContent = "Sorry, but you LOST this time :(";
-    pWinner.style.color = "rgba(255, 0, 0, 0.5)";
-    pWinner.style.textShadow = "rgb(255, 204, 204) 3px 3px 4px";
-  } else if (game.aiChoice === game.playerChoice) {
-    pWinner.textContent = "Draw";
-    pWinner.style.color = "blue";
-    pWinner.style.textShadow = "rgb(136, 182, 255) 3px 3px 4px";
-  } else {
-    pWinner.textContent = "Congratulations, you are a WINNER :)";
-    pWinner.style.color = "green";
-    pWinner.style.textShadow = "rgb(163, 255, 188) 3px 3px 4px";
-  }
+  const gameResult = chekResult(game.playerChoice, game.aiChoice);
+
   endGame();
 };
 
